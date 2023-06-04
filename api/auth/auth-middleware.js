@@ -1,6 +1,6 @@
-const { JWT_SECRET } = require("../secrets"); // bu secreti kullanın!
+const { JWT_SECRET } = require("../secrets");
 const userModel = require("../users/users-model");
-const jwt = require("jsonwebtoken");
+
 const bcryptjs = require("bcryptjs");
 
 const usernameVarmi = async (req, res, next) => {
@@ -42,6 +42,8 @@ const checkPayload = (req, res, next) => {
     next(error);
   }
 };
+
+
 
 module.exports = {
   usernameVarmi,
