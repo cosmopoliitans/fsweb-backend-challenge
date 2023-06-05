@@ -1,7 +1,5 @@
 const db = require("../../data/db-config")
-const { JWT_SECRET } = require("../secrets");
 const userModel = require("../users/users-model");
-
 const bcryptjs = require("bcryptjs");
 
 const usernameVarmi = async (req, res, next) => {
@@ -47,8 +45,8 @@ const checkDuplicateEmail = async (req, res, next) => {
 
 const checkPayload = (req, res, next) => {
   try {
-    let { user_email, user_password } = req.body;
-    if (!user_email || !user_password) {
+    let {user_name, user_email, user_password } = req.body;
+    if (!user_name || !user_email || !user_password) {
       res.status(400).json({ messsage: "Girdiğiniz alanları kontrol edin!" });
     } else {
       next();
