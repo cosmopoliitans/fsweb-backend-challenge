@@ -3,6 +3,9 @@ const db = require("../../data/db-config.js");
 
 
 // "users" tablosu için model işlemleri
+function getAllUsers() {
+  return db("users");
+}
 
 function getUserById(user_id) {
   return db("users").where("user_id", user_id);
@@ -44,6 +47,7 @@ function removeTweet(tweets_id) {
 
 
 module.exports = {
+  getAllUsers,
   createUser,
   getAllTweets,
   getTweetById,

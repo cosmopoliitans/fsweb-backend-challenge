@@ -22,6 +22,20 @@ const limited = (req, res, next) => {
   }
 };
 
+const checkPayloadTweet = (req, res, next) => {
+  try {
+    let { user_name, user_body, user_id } = req.body;
+    if (!user_name || !user_body || !user_id) {
+      res.status(400).json({ messsage: "Girdiğiniz alanları kontrol edin!" });
+    } else {
+      next();
+    }
+  } catch (error) {
+    next(error);
+  }
+};
+
 module.exports = {
-limited
+  limited,
+  checkPayloadTweet,
 };

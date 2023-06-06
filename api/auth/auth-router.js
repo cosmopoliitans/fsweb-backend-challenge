@@ -3,11 +3,22 @@ const { JWT_SECRET } = require("../secrets");
 const userModel = require("../users/users-model");
 const jwt = require("jsonwebtoken");
 const bcryptjs = require("bcryptjs");
+const Users = require("../users/users-model");
 const {
   checkPayload,
   usernameVarmi,
   checkDuplicateEmail,
 } = require("./auth-middleware");
+const {limited} = require("../users/users-middleware")
+
+
+router.get("/",limited, (req, res, next) => {
+  Users.getAllUsers()
+    .then((user) => {
+      res.json(user);
+    })
+    .catch(next);
+});
 
 router.post("/register",checkPayload,checkDuplicateEmail, async (req, res, next) => {
   try {

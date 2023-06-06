@@ -1,6 +1,6 @@
 const router = require("express").Router();
 const Users = require("./users-model.js");
-const { limited } = require("../users/users-middleware.js");
+const { limited, checkPayloadTweet } = require("../users/users-middleware.js");
 
 router.get("/", limited, (req, res, next) => {
   Users.getAllTweets()
@@ -19,7 +19,7 @@ router.get("/:user_id", limited, (req, res, next) => {
     .catch(next);
 });
 
-router.post("/tweets", async (req, res, next) => {
+router.post("/tweets", checkPayloadTweet, async (req, res, next) => {
   try {
     // Yeni tweet'in veritabanına kaydedilmesi
     const tweet = {
