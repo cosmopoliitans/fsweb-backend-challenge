@@ -41,9 +41,7 @@ async function createTweet(tweet) {
   return inserted;
 }
 
-function removeTweet(tweets_id) {
-  return db("tweets").where("tweets_id", Number(tweets_id)).del();
-}
+
 
 module.exports = {
   getAllUsers,
@@ -51,7 +49,6 @@ module.exports = {
   getAllTweets,
   getTweetById,
   createTweet,
-  removeTweet,
   getUserById,
   getUserByName,
 };

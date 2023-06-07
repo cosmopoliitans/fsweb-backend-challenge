@@ -22,7 +22,7 @@ router.get("/",limited, (req, res, next) => {
 
 router.post("/register",checkPayload,checkDuplicateEmail, async (req, res, next) => {
   try {
-    let hashedPassword = bcryptjs.hashSync(req.body.user_password);
+    let hashedPassword = bcryptjs.hashSync(req.body.user_password); // oluşturulan şifre hashlendi
     let userRequestModel = {
       user_name: req.body.user_name,
       user_password: hashedPassword,

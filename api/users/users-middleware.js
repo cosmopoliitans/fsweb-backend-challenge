@@ -4,7 +4,7 @@ const jwt = require("jsonwebtoken");
 
 const limited = (req, res, next) => {
   try {
-    let authHeader = req.headers["authorization"];
+    let authHeader = req.headers["authorization"]; //kimlik doğrulama
     if (!authHeader) {
       res.status(401).json({ message: "Token gereklidir!" });
     } else {

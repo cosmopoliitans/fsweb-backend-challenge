@@ -18,11 +18,12 @@ server.use(cors());
 server.use("/api/auth", authRouter);
 server.use("/api/users", usersRouter);
 
+//sunucuda, bir hata ortaya çıktığında bu hatayı yakalayan ve uygun bir yanıt 
+//döndüren bir hata işleyici
 server.use((err, req, res, next) => {
   // eslint-disable-line
   res.status(err.status || 500).json({
-    message: err.message,
-    stack: err.stack,
+    message: err.message || "Server Error"
   });
 });
 
