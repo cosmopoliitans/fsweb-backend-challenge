@@ -1,7 +1,5 @@
 const db = require("../../data/db-config.js");
 
-
-
 // "users" tablosu için model işlemleri
 function getAllUsers() {
   return db("users");
@@ -9,6 +7,9 @@ function getAllUsers() {
 
 function getUserById(user_id) {
   return db("users").where("user_id", user_id);
+}
+function getUserByName(user_name) {
+  return db("users").where("user_name", user_name);
 }
 
 async function createUser({ user_name, user_password, user_email }) {
@@ -23,16 +24,15 @@ async function createUser({ user_name, user_password, user_email }) {
   });
   return getUserById(created_user_id);
 }
-    
 
 // "tweets" tablosu için model işlemleri
 
 function getAllTweets() {
-    return db("tweets")
+  return db("tweets");
 }
 
 function getTweetById(user_id) {
-  return db("tweets").where("user_id", user_id).first()   
+  return db("tweets").where("user_id", user_id).first();
 }
 
 async function createTweet(tweet) {
@@ -45,7 +45,6 @@ function removeTweet(tweets_id) {
   return db("tweets").where("tweets_id", Number(tweets_id)).del();
 }
 
-
 module.exports = {
   getAllUsers,
   createUser,
@@ -54,4 +53,5 @@ module.exports = {
   createTweet,
   removeTweet,
   getUserById,
+  getUserByName,
 };

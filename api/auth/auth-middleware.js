@@ -1,10 +1,10 @@
-const db = require("../../data/db-config")
+const db = require("../../data/db-config");
 const userModel = require("../users/users-model");
 const bcryptjs = require("bcryptjs");
 
 const usernameVarmi = async (req, res, next) => {
   try {
-    let isExist = await userModel.getUserById(req.body.user_id); 
+    let isExist = await userModel.getUserByName(req.body.user_name);
     if (isExist && isExist.length > 0) {
       let currentUser = isExist[0];
       let isPasswordMatch = bcryptjs.compareSync(
@@ -13,7 +13,7 @@ const usernameVarmi = async (req, res, next) => {
       );
       if (!isPasswordMatch) {
         res.status(401).json({
-          message: "Girilen bilgiler hatalı!",
+          message: "Girilen bilgiler hatalı!!!",
         });
       } else {
         req.currentUser = currentUser;
@@ -45,8 +45,8 @@ const checkDuplicateEmail = async (req, res, next) => {
 
 const checkPayload = (req, res, next) => {
   try {
-    let {user_name, user_email, user_password } = req.body;
-    if (!user_name || !user_email || !user_password) {
+    let { user_name, user_password } = req.body;
+    if (!user_name || !user_password) {
       res.status(400).json({ messsage: "Girdiğiniz alanları kontrol edin!" });
     } else {
       next();
@@ -55,8 +55,6 @@ const checkPayload = (req, res, next) => {
     next(error);
   }
 };
-
-
 
 module.exports = {
   usernameVarmi,
